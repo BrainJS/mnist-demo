@@ -1,0 +1,19 @@
+{
+  "name": "mnist-demo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BrainJS/mnist-demo.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/BrainJS/mnist-demo/issues"
+  },
+  "homepage": "https://github.com/BrainJS/mnist-demo#readme"
+}
