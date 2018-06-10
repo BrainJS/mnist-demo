@@ -15,5 +15,9 @@
   "bugs": {
     "url": "https://github.com/BrainJS/mnist-demo/issues"
   },
-  "homepage": "https://github.com/BrainJS/mnist-demo#readme"
+  "homepage": "https://github.com/BrainJS/mnist-demo#readme",
+  "dependencies": {
+    "brain.js": "^1.2.1",
+    "mnist": "^1.1.0"
+  }
 }

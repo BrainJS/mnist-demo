@@ -1,43 +1,41 @@
 // lofi data loader
-(function() {
-  var data = [];
-  var batches = [0, 20];
-  var loadedCount = 0;
-  var images = [];
+function loadJSON(path) {
+  var xhr = new XMLHttpRequest();
+  return new Promise(function(resolve, reject) {
+    xhr.onreadystatechange = function() {
+      if (xhr.readyState === XMLHttpRequest.DONE) {
+        if (xhr.status === 200) {
+          resolve(JSON.parse(xhr.responseText));
+        } else {
+          reject(xhr);
+        }
+      }
+    };
+    xhr.open('GET', path, true);
+    xhr.send();
+  });
+}
 
-  function get() {
-    for (var i = 0; i < batches.length; i++) {
-      var image = new Image();
-      var index = i;
-      image.onload = onload;
-      image.index = i;
-      image.src = 'data/mnist_batch_' + batches[i] + '.png';
-      images.push(image);
-    }
+function randomImageData(data) {
+  var i = (data.length * Math.random()).toFixed();
+  return data[i];
+}
+
+function toImage(dataItem) {
+  var canvas = document.createElement('canvas');
+  canvas.style.backgroundColor = 'black';
+  canvas.width = 28;
+  canvas.height = 28;
+  var ctx = canvas.getContext('2d');
+  var imageArray = [];
+  var length = 28 * 28;
+  for (var i = 0; i < length; i++) {
+    var color = dataItem.input[i] * 255;
+    imageArray.push(color);
+    imageArray.push(color);
+    imageArray.push(color);
+    imageArray.push(color);
   }
-
-  function onload() {
-    loadedCount++;
-    console.log(loadedCount);
-    if (loadedCount === batches.length) {
-      finished();
-    }
-  }
-
-  function finished() {
-    var canvas = document.createElement('canvas');
-    var ctx = canvas.getContext('2d');
-    for (var i = 0; i < images.length; i++) {
-      var image = images[i];
-      canvas.width = image.width;
-      canvas.height = image.height;
-      ctx.drawImage(image, 0, 0);
-      data[i] = ctx.getImageData(0, 0, canvas.width, canvas.height);
-    }
-    var event = new CustomEvent('data-loaded');
-    event.data = data;
-    document.dispatchEvent(event);
-  }
-
-  get();
-})();
+  ctx.putImageData(new ImageData(new Uint8ClampedArray(imageArray), 28, 28), 0, 0);
+  return canvas;
+}
