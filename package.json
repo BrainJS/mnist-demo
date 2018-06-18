@@ -17,7 +17,7 @@
   },
   "homepage": "https://github.com/BrainJS/mnist-demo#readme",
   "dependencies": {
-    "brain.js": "^1.2.1",
+    "brain.js": "https://github.com/BrainJS/brain.js.git#nn-gpu-layers",
     "mnist": "^1.1.0"
   }
 }
